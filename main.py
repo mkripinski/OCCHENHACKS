@@ -31,11 +31,11 @@ if 'prompt_selection' not in st.session_state:
 #Page Title
 st.title("King's Secret Helper")
 
-st.sidebar.radio("Chat Selection:",
-                 ["Declarations",
-                  "ndnsclsmlc"],
-                  on_change=clear_history
-                  )
+st.sidebar.header("something")
+add_selectbox = st.sidebar.selectbox(
+    "pick an opt",
+    ("opt1", "opt2", "opt3")
+)
 
 with st.chat_message("assistant"):
         st.markdown("Greetings my King. How can I be of assistance?")
