@@ -35,7 +35,7 @@ if 'chat' not in st.session_state:
 if 'prompt_selection' not in st.session_state:
     st.session_state.prompt_selection = 1
 #Page Title
-st.title("King's Secret Helper")
+st.title("Kween Henlizabeth's AI Chicken")
 
 st.session_state.prompt_selection = st.sidebar.selectbox(
     label="How Doth Thou Wish To Assist Kween Henlizabeth",
@@ -53,7 +53,7 @@ with st.chat_message("assistant", avatar="https://cdn.openart.ai/uploads/image_t
 if user_prompt := st.chat_input("Enter Ye Decree Hence"):
    
     # Add our input to the chat window
-    with st.chat_message("user"):
+    with st.chat_message("user",avatar="./favicon-25.svg"):
         st.markdown(user_prompt)
     
     #send input to Gemini and retrieve response
