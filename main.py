@@ -35,7 +35,7 @@ if 'chat' not in st.session_state:
 if 'prompt_selection' not in st.session_state:
     st.session_state.prompt_selection = 1
 #Page Title
-st.title("Kween Henlizabeth's AI Chicken")
+st.title("Kween Henlizabeth's Behooving Benedict")
 
 st.session_state.prompt_selection = st.sidebar.selectbox(
     label="How Doth Thou Wish To Assist Kween Henlizabeth",
@@ -76,5 +76,5 @@ if user_prompt := st.chat_input("Enter Ye Decree Hence"):
         response = st.session_state.chat.send_message(user_prompt)
 
     #add response to message box
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant", avatar="https://cdn.openart.ai/uploads/image_tgCCAiI9_1740869342844_raw.jpg"):
         st.markdown(response.text)
