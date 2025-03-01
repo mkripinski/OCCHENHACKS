@@ -40,13 +40,13 @@ st.title("Kween Henlizabeth's Behooving Benedict")
 st.session_state.prompt_selection = st.sidebar.selectbox(
     label="How Doth Thou Wish To Assist Kween Henlizabeth",
     options=("Decree Creation",
-      "Future option 2",
+      "General Use",
       ),
     on_change=clear_history
 )
 
 with st.chat_message("assistant", avatar="https://cdn.openart.ai/uploads/image_tgCCAiI9_1740869342844_raw.jpg"):
-        st.markdown("Greetings my King. How can I be of assistance?")
+        st.markdown("Greetings my Kween. How can I be of assistance?")
 
 
 #User Enters Text
