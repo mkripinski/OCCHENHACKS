@@ -1,6 +1,13 @@
 import streamlit as st
-from google import genai
-client = genai.Client(api_key="AIzaSyBFB5rg_NNHDzvbfV0dGlukpK5ViHNR4fI")
+from google import generativeai
+
+generativeai.configure(api_key="AIzaSyBFB5rg_NNHDzvbfV0dGlukpK5ViHNR4fI")
+#System instructions
+system_instructions = "Pretend you exist in Medieval Times. Respond to prompts with Medieval language"
+
+model = generativeai.GenerativeModel("models/gemini-2.0-flash",
+    system_instruction=system_instructions,)
+
 
 #Prompt definitions
 prompts = [
@@ -10,7 +17,7 @@ prompts = [
 ]
 
 def clear_history():
-     st.session_state.chat = client.chats.create(model="gemini-2.0-flash",history=list())
+     st.session_state.chat = model.start_chat()
 
 st.set_page_config(
     page_title="King's Pigeon",
@@ -18,8 +25,7 @@ st.set_page_config(
 
 #Session state variable declaration
 if 'chat' not in st.session_state:
-    st.session_state.chat = client.chats.create(model="gemini-2.0-flash",history=list())
-
+    st.session_state.chat = model.start_chat()
 if 'prompt_selection' not in st.session_state:
     st.session_state.prompt_selection = 1
 #Page Title
