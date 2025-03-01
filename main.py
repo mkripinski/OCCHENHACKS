@@ -8,6 +8,7 @@ system_instructions = "Pretend you exist in Medieval Times. Respond to prompts w
 model = generativeai.GenerativeModel("models/gemini-2.0-flash",
     system_instruction=system_instructions,)
 
+<<<<<<< Updated upstream
 
 #Prompt definitions
 prompts = [
@@ -28,6 +29,8 @@ prompts = [
     "Enter Second Prompt Here"
 ]
 
+=======
+>>>>>>> Stashed changes
 def clear_history():
      st.session_state.chat = model.start_chat()
 
@@ -43,25 +46,17 @@ if 'prompt_selection' not in st.session_state:
 #Page Title
 st.title("King's Secret Helper")
 
-st.sidebar.header("something")
 st.session_state.prompt_selection = st.sidebar.selectbox(
-    "pick an opt",
-    ("opt1", "opt2", "opt3")
+    label="How Doth Thou Wish To Assist Kween Henlizabeth",
+    options=("Decree Creation",
+      "Future option 2",
+      ),
+    on_change=clear_history
 )
 
 with st.chat_message("assistant"):
         st.markdown("Greetings my King. How can I be of assistance?")
 
-#prompt selection cases
-match st.session_state.prompt_selection:
-
-        case 1:
-
-            st.session_state.chat.send_message(prompts[1])
-        case 2:
-            st.session_state.chat.send_message(prompts[2])
-        case _:
-            st.warning("Ye Must Choose Ye Chat Type")
 
 #User Enters Text
 if user_prompt := st.chat_input("Enter Ye Decree Hence"):
@@ -71,7 +66,15 @@ if user_prompt := st.chat_input("Enter Ye Decree Hence"):
         st.markdown(user_prompt)
     
     #send input to Gemini and retrieve response
-    response = st.session_state.chat.send_message(user_prompt)
+    if st.session_state.prompt_selection == "Decree Creation":
+         response = st.session_state.chat.send_message(f"You are the Royal Scribe of the Kingdom. Speak in grand, medieval style. "
+                                                        f"Format your response as a formal decree, following this structure:\n\n"
+                                                        f"📜 **Grand Introduction** 📜\n"
+                                                         f"📖 **Proclamation of the Law or Message** 📖\n"
+                                                          f"🏰 **Closing Words from the Crown** 🏰\n\n"
+                                                            f"Here is the King's request: {user_prompt}")
+    else:
+        response = st.session_state.chat.send_message(user_prompt)
 
     #add response to message box
     with st.chat_message("assistant"):
