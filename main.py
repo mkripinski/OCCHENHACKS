@@ -11,7 +11,13 @@ model = generativeai.GenerativeModel("models/gemini-2.0-flash",
 
 #Prompt definitions
 prompts = [
-    "Enter First Prompt Here",
+      f"You are the Royal Scribe of the Kingdom. Speak in grand, medieval style. "
+      f"Format your response as a formal decree, following this structure:\n\n"
+      f"📜 **Grand Introduction** 📜\n"
+      f"📖 **Proclamation of the Law or Message** 📖\n"
+      f"🏰 **Closing Words from the Crown** 🏰\n\n"
+      f"Here is the King's request: {user_prompt}"
+    
     "Enter Second Prompt Here"
 
 ]
