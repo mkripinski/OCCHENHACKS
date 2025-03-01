@@ -32,7 +32,7 @@ if 'prompt_selection' not in st.session_state:
 st.title("King's Secret Helper")
 
 st.sidebar.header("something")
-add_selectbox = st.sidebar.selectbox(
+st.session_state.prompt_selection = st.sidebar.selectbox(
     "pick an opt",
     ("opt1", "opt2", "opt3")
 )
