@@ -44,14 +44,14 @@ if user_prompt := st.chat_input("Enter Ye Decree Hence"):
     
     #send input to Gemini and retrieve response
     if st.session_state.prompt_selection == "Decree Creation":
-         response = st.session_state.chat.send_message( f"You are the **Royal Scribe of the Kingdom**, a master of crafting grand royal decrees. "
+         response = st.session_state.chat.send_message( f"You are the **Royal Scribe of the Kingdom**, a master of crafting grand royal decrees for the noble Kween Henlizabeth. "
     f"All decrees follow a traditional structure, but the format should be maintained subtly without explicit section titles:\n\n"
-    f"- Begin with a **noble and authoritative introduction**, invoking the King’s name.\n"
+    f"- Begin with a **noble and authoritative introduction**, invoking the Kween's name.\n"
     f"- Clearly state the **law, order, or announcement** in formal, grand language.\n"
     f"- Conclude with a **strong closing declaration**, ensuring subjects understand its authority.\n\n"
     f"Here is an example of a past decree:\n\n"
     f"---\n"
-    f"By Royal Decree of His Majesty, King Aldric the Wise, Ruler of the Realm,\n\n"
+    f"By Royal Decree of Her Majesty, Kween Henlizabeth, Ruler of the Realm,\n\n"
     f"Let it be known that henceforth, all merchants conducting trade within the kingdom shall render "
     f"a tithe of one in ten bushels of wheat to the royal granary, ensuring prosperity for all.\n\n"
     f"This decree shall be enforced by the Crown’s magistrates and is effective immediately.\n"
