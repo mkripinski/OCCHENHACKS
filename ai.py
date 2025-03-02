@@ -1,6 +1,7 @@
 import streamlit as st
 import random
 from google import generativeai
+from streamlit_mic_recorder import speech_to_text
 
 generativeai.configure(api_key="AIzaSyBFB5rg_NNHDzvbfV0dGlukpK5ViHNR4fI")
 #System instructions
@@ -24,28 +25,15 @@ def generate_intro():
         "By the will of the Crown and the grace of the divine, Her Majesty, Kween Henlizabeth commands,"
     ]
     return random.choice(intros)
-=======
-import time
-if 'timer' not in st.session_state:
-    st.session_state.timer = 0
-    st.session_state.time = 0
->>>>>>> parent of f9af5e7 (Revert "Merge branch 'main' of https://github.com/mkripinski/OCCHENHACKS")
-
-st.set_page_config(
-    page_title="King's Pigeon",
-    page_title="Kween's Pigeon",
-)
-pg = st.navigation([st.Page("ai.py",title="Decree Drafting", default=True),
-                    st.Page("cal.py",title="Calendar"),
-                    st.Page("note.py",title="NoteTaking"),
-                    ]
-                    )
 
 #Session state variable declaration
 if 'chat' not in st.session_state:
     st.session_state.chat = model.start_chat()
 if 'prompt_selection' not in st.session_state:
     st.session_state.prompt_selection = 1
+if "stt" not in st.session_state:
+    st.session_state.stt = ""
+
 #Page Title
 st.title("Kween Henlizabeth's Behooving Benedict")
 
@@ -57,36 +45,41 @@ st.session_state.prompt_selection = st.sidebar.selectbox(
     on_change=clear_history
 )
 
+st.session_state.stt = speech_to_text(just_once=True, start_prompt="Start Ye Talkin",stop_prompt="End Ye Talkin")
+
 with st.chat_message("assistant", avatar="https://cdn.openart.ai/uploads/image_tgCCAiI9_1740869342844_raw.jpg"):
         st.markdown("Greetings my Kween. How can I be of assistance?")
 
 
 #User Enters Text
-if user_prompt := st.chat_input("Enter Ye Decree Hence"):
-   
+if user_prompt := st.chat_input("Enter Ye Decree Hence")or st.session_state.stt != "" and st.session_state.stt != None:
+    if st.session_state.stt != "" and st.session_state.stt != None:
+        user_prompt = st.session_state.stt
+
+
     # Add our input to the chat window
     with st.chat_message("user",avatar="./favicon-25.svg"):
         st.markdown(user_prompt)
-=======
-with st.sidebar:
-    def timer_start():
-        for st.session_state.time in range(timer,0,-1):
-            mm, ss = st.session_state.time//60, st.session_state.time%60
-            ph.metric("Timer", f"{mm:02d}:{ss:02d}")
-            time.sleep(1)
     
-    timer = st.number_input("Timer",1,300)
-    st.button("Start",on_click=timer_start)
-    timer *=60
-    ph = st.empty()
->>>>>>> parent of f9af5e7 (Revert "Merge branch 'main' of https://github.com/mkripinski/OCCHENHACKS")
-    
+    #send input to Gemini and retrieve response
+    if st.session_state.prompt_selection == "Decree Creation":
+         response = st.session_state.chat.send_message(f"You are the **Royal Scribe of the Kingdom**, a master of crafting grand royal decrees for the noble Kween Henlizabeth. "
+                       f"All decrees follow a traditional structure, but the format should be maintained subtly without explicit section titles:\n\n"
+                       f"- Begin with a **noble and authoritative introduction**, invoking the Kween's name with variation.\n"
+                       f"- Clearly state the **law, order, or proclamation** in formal, grand language.\n"
+                       f"- Conclude with a **strong closing declaration**, ensuring subjects understand its authority and enforcement.\n\n"
+                       f"Here is an example of a past decree:\n\n"
+                       f"---\n"
+                       f"{generate_intro()}\n\n"  # Inserts a random intro here!
+                       f"Let it be known that henceforth, all merchants conducting trade within the kingdom shall render "
+                       f"a tithe of one in ten bushels of wheat to the royal granary, ensuring prosperity for all.\n\n"
+                       f"This decree shall be enforced by the Crown’s magistrates and is effective immediately.\n"
+                       f"---\n\n"
+                       f"Now, write a similar decree based on the following request:\n"
+                       f"{user_prompt}")
+    else:
+        response = st.session_state.chat.send_message(user_prompt)
 
-<<<<<<< HEAD
     #add response to message box
     with st.chat_message("assistant", avatar="https://cdn.openart.ai/uploads/image_tgCCAiI9_1740869342844_raw.jpg"):
         st.markdown(response.text)
-=======
-
-pg.run()
->>>>>>> parent of f9af5e7 (Revert "Merge branch 'main' of https://github.com/mkripinski/OCCHENHACKS")
