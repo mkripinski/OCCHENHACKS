@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+import time
 from google import generativeai
 
 generativeai.configure(api_key="AIzaSyBFB5rg_NNHDzvbfV0dGlukpK5ViHNR4fI")
@@ -35,12 +36,13 @@ if 'chat' not in st.session_state:
 if 'prompt_selection' not in st.session_state:
     st.session_state.prompt_selection = 1
 #Page Title
-st.title("Kween Henlizabeth's Behooving Benedict")
+st.title("Kween Henlizabeth's royal scribe")
 
 st.session_state.prompt_selection = st.sidebar.selectbox(
     label="How Doth Thou Wish To Assist Kween Henlizabeth",
     options=("Decree Creation",
       "General Use",
+      "Timer"
       ),
     on_change=clear_history
 )
@@ -53,7 +55,7 @@ with st.chat_message("assistant", avatar="https://cdn.openart.ai/uploads/image_t
 if user_prompt := st.chat_input("Enter Ye Decree Hence"):
    
     # Add our input to the chat window
-    with st.chat_message("user",avatar="./favicon-25.svg"):
+    with st.chat_message("user",avatar="https://img.freepik.com/free-photo/close-up-satisfied-happy-guy-shows-thumbs-up-smiles-praise-something-good-excellent-job-compliment-your-effort-well-done-excellent-standing-white-wall_176420-38494.jpg"):
         st.markdown(user_prompt)
     
     #send input to Gemini and retrieve response
@@ -78,3 +80,28 @@ if user_prompt := st.chat_input("Enter Ye Decree Hence"):
     #add response to message box
     with st.chat_message("assistant", avatar="https://cdn.openart.ai/uploads/image_tgCCAiI9_1740869342844_raw.jpg"):
         st.markdown(response.text)
+
+    def set_background(image_url):
+        """
+    Sets the background of the Streamlit app.
+
+    Args:
+        image_url (str): URL of the background image.
+    """
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("{image_url}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+# Example usage:
+image_url = "https://i.pinimg.com/736x/41/51/77/415177f39fe8ec6b504988834a900031.jpg" # Replace with your image URL
+set_background(image_url)
