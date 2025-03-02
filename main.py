@@ -44,7 +44,6 @@ st.title("Kween Henlizabeth's Behooving Benedict")
 st.session_state.prompt_selection = st.sidebar.selectbox(
     label="How Doth Thou Wish To Assist Kween Henlizabeth",
     options=("Decree Creation",
-      "General Use",
       "General Use", "Notes", "Speech To Text", "Timer", "Calendar",
       ),
     on_change=clear_history
