@@ -1,6 +1,7 @@
 import streamlit as st
 import random
 from google import generativeai
+from streamlit_mic_recorder import speech_to_text
 
 generativeai.configure(api_key="AIzaSyBFB5rg_NNHDzvbfV0dGlukpK5ViHNR4fI")
 #System instructions
@@ -26,7 +27,7 @@ def generate_intro():
     return random.choice(intros)
 
 st.set_page_config(
-    page_title="King's Pigeon",
+    page_title="Kween's Pigeon",
 )
 
 #Session state variable declaration
@@ -34,6 +35,9 @@ if 'chat' not in st.session_state:
     st.session_state.chat = model.start_chat()
 if 'prompt_selection' not in st.session_state:
     st.session_state.prompt_selection = 1
+if "stt" not in st.session_state:
+    st.session_state.stt = ""
+
 #Page Title
 st.title("Kween Henlizabeth's Behooving Benedict")
 
@@ -46,13 +50,18 @@ st.session_state.prompt_selection = st.sidebar.selectbox(
     on_change=clear_history
 )
 
+st.session_state.stt = speech_to_text(just_once=True, start_prompt="Start Ye Talkin",stop_prompt="End Ye Talkin")
+
 with st.chat_message("assistant", avatar="https://cdn.openart.ai/uploads/image_tgCCAiI9_1740869342844_raw.jpg"):
         st.markdown("Greetings my Kween. How can I be of assistance?")
 
 
 #User Enters Text
-if user_prompt := st.chat_input("Enter Ye Decree Hence"):
-   
+if user_prompt := st.chat_input("Enter Ye Decree Hence")or st.session_state.stt != "" and st.session_state.stt != None:
+    if st.session_state.stt != "" and st.session_state.stt != None:
+        user_prompt = st.session_state.stt
+
+
     # Add our input to the chat window
     with st.chat_message("user",avatar="./favicon-25.svg"):
         st.markdown(user_prompt)
