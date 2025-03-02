@@ -1,4 +1,5 @@
 import streamlit as st
+<<<<<<< HEAD
 import random
 from google import generativeai
 
@@ -32,7 +33,6 @@ if 'timer' not in st.session_state:
 >>>>>>> parent of f9af5e7 (Revert "Merge branch 'main' of https://github.com/mkripinski/OCCHENHACKS")
 
 st.set_page_config(
-    page_title="King's Pigeon",
     page_title="Kween's Pigeon",
 )
 pg = st.navigation([st.Page("ai.py",title="Decree Drafting", default=True),
@@ -41,6 +41,7 @@ pg = st.navigation([st.Page("ai.py",title="Decree Drafting", default=True),
                     ]
                     )
 
+<<<<<<< HEAD
 #Session state variable declaration
 if 'chat' not in st.session_state:
     st.session_state.chat = model.start_chat()
