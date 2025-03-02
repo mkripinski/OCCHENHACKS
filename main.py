@@ -9,7 +9,7 @@ st.set_page_config(
 )
 pg = st.navigation([st.Page("ai.py",title="Decree Drafting", default=True),
                     st.Page("cal.py",title="Calendar"),
-                    st.Page("note.py",title="NoteTaking"),
+                    st.Page("note.py",title="Note Taking"),
                     ]
                     )
 
