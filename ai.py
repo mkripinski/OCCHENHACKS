@@ -26,10 +26,6 @@ def generate_intro():
     ]
     return random.choice(intros)
 
-st.set_page_config(
-    page_title="Kween's Pigeon",
-)
-
 #Session state variable declaration
 if 'chat' not in st.session_state:
     st.session_state.chat = model.start_chat()
